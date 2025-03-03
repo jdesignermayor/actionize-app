@@ -1,0 +1,9 @@
+import { Card, CardContent } from "@/components/ui/card";
+
+export default function AIMessageCard({ message }: { message: any }) {
+    return <Card className="bg-[#1b1b1b]">
+    <CardContent className="flex items-center p-4 gap-2 ">
+        <p>AI: {message}</p>
+    </CardContent>
+</Card>
+}
