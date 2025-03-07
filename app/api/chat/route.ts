@@ -1,41 +1,9 @@
-import { getEmbeddings } from '@/app/utils/embeddings';
-import { getMatchesFromEmbeddings, Metadata } from '@/app/utils/pinecone';
+import { getContext } from '@/app/utils/context';
 import { mistral } from '@ai-sdk/mistral';
-import { ScoredVector } from '@pinecone-database/pinecone/dist/pinecone-generated-ts-fetch/db_data';
 import { Message, streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
-
-
-const getContext = async (
-  message: string,
-  namespace: string,
-  maxTokens = 3000,
-  minScore = 0.7,
-  getOnlyText = true
-): Promise<string | ScoredVector[]> => {
-  // Get the embeddings of the input message
-  const embedding = await getEmbeddings(message);
-
-  // Retrieve the matches for the embeddings from the specified namespace
-  const matches = await getMatchesFromEmbeddings(embedding, 3, namespace);
-
-  // Filter out the matches that have a score lower than the minimum score
-  const qualifyingDocs = matches.filter((m) => m.score && m.score > minScore);
-
-  // If the `getOnlyText` flag is false, we'll return the matches
-  if (!getOnlyText) {
-    return qualifyingDocs;
-  }
-
-  let docs = matches
-    ? qualifyingDocs.map((match) => (match.metadata as Metadata).chunk)
-    : [];
-  // Join all the chunks of text together, truncate to the maximum number of tokens, and return the result
-  return docs.join("\n").substring(0, maxTokens);
-};
-
 
 export async function POST(req: Request) {
   
@@ -58,6 +26,7 @@ export async function POST(req: Request) {
     START CONTEXT BLOCK
     ${context}
     END OF CONTEXT BLOCK
+    Do not include "Based on the information you've provided" in your response.
     AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation.
     If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
     AI assistant will not apologize for previous responses, but instead will indicated new information was gained.

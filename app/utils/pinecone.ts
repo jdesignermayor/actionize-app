@@ -12,7 +12,7 @@ const getMatchesFromEmbeddings = async (embeddings: number[], topK: number, name
   // Obtain a client for Pinecone
   const pinecone = new Pinecone({ apiKey: process.env.PINNECONE_API_KEY || ''});
 
-  const indexName: string = '';
+  const indexName: string = process.env.PINECONE_INDEX || ''; 
   if (indexName === '') {
     throw new Error('PINECONE_INDEX environment variable not set')
   }
