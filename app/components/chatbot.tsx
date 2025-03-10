@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import UserMessageCard from './userMessageCard';
 import AIMessageCard from './aiMessageCard';
 import Loader from "react-spinners/PulseLoader";
+import UserPrevRateCard from './userPrevRateCard';
 
 export default function Chatbot() {
     const { messages, input, status, stop, handleInputChange, handleSubmit } = useChat({});
@@ -64,6 +65,28 @@ export default function Chatbot() {
                             switch (part.type) {
                                 case 'text':
                                     return message.role === 'user' ? <UserMessageCard key={message.id} text={part.text} /> : <AIMessageCard key={message.id} text={part.text} />;
+
+                                case 'tool-invocation': {
+                                    const callId = part.toolInvocation.toolCallId;
+
+                                    switch (part.toolInvocation.toolName) {
+                                        case 'getUserPreviousRates': {
+                                            switch (part.toolInvocation.state) {
+                                              case 'call':
+                                                return <div key={callId}>Getting location...</div>;
+                                              case 'result':
+                                                return (
+                                                  <div key={callId}>
+                                                    <UserPrevRateCard props={part.toolInvocation.result} />
+                                                  </div>
+                                                );
+                                            }
+                                            break;
+                                          }
+                        
+                                    }
+                                }
+
                                 default:
                                     break;
                             }

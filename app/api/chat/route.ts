@@ -1,6 +1,30 @@
 import { getContext } from '@/app/utils/context';
 import { mistral } from '@ai-sdk/mistral';
-import { Message, streamText } from 'ai';
+import { Message, streamText, tool } from 'ai';
+import { z } from 'zod';
+
+  
+const mockUserId = '123';
+const mockUserPreviousTaskRates = {
+  done: 15,
+  opened: 10,
+  closed: 5,
+  total: 30,
+  tasks: [
+    {
+      id: '1',
+      title: 'Finish the project',
+    },
+    {
+      id: '2',
+      title: 'spent time on the side project',
+    },
+    {
+      id: '3',
+      title: 'spent time with family',
+    },
+  ],
+}
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -33,8 +57,11 @@ export async function POST(req: Request) {
     AI assistant will not invent anything that is not drawn directly from the context.
     `,
     },
+    {
+      role: 'system',
+      content: 'What are your previous rates for id: 123 ?',
+    },
   ];
-  
 
   const result = streamText({
     model: mistral('mistral-large-latest'),
@@ -43,6 +70,18 @@ export async function POST(req: Request) {
       ...prompt,
       ...messages.filter((m: Message) => m.role === 'user'),
     ],
+    tools: {
+      getUserPreviousRates: tool({
+        description: 'Get the user\'s previous rates',
+        parameters: z.object({
+          userId: z.string().describe('The user ID'),
+        }),
+        execute: async ({ userId }) => {
+          console.log('userId', userId);
+          return mockUserPreviousTaskRates;
+        }
+      }),
+    },
   });
 
   return result.toDataStreamResponse();
