@@ -60,7 +60,15 @@ export default function Chatbot() {
             <div className='w-[450px] flex flex-col gap-4'>
                 {messages.map(message => (
                     <div key={message.id}>
-                        {message.role === 'user' ? <UserMessageCard message={message.content} /> : <AIMessageCard message={message} />}
+                        {message?.parts?.map(part => {
+                            switch (part.type) {
+                                case 'text':
+                                    return message.role === 'user' ? <UserMessageCard key={message.id} text={part.text} /> : <AIMessageCard key={message.id} text={part.text} />;
+                                default:
+                                    break;
+                            }
+                        })}
+
                     </div>
                 ))}
             </div>
