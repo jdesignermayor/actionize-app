@@ -5,20 +5,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 interface TaskManagerType {
-    isTaskManagerExpanded: boolean,
+    isExpandedTaskManager: boolean,
 }
 
-export default function TaskManager({ isTaskManagerExpanded }: TaskManagerType) {
+export default function TaskManager({ isExpandedTaskManager }: TaskManagerType) {
     const [tasks, setTasks] = useState<Task[] | []>([]);
 
     useEffect(() => {
         setTimeout(() => {
             setTasks(MOCK_USER_TASKS.tasks);
-        }, 1000);
-    }, [isTaskManagerExpanded]);
+        }, 400);
+    }, [isExpandedTaskManager]);
 
     return <>
-        <div className={`flex flex-col gap-[2em] px-10 py-[5em] ${isTaskManagerExpanded ? 'w-[90rem]' : 'w-[70rem]'} bg-[#131313] border border-[#444444] rounded-lg h-[90svh]`}>
+        <div className={`flex flex-col gap-[2em] px-10 py-[5em] ${isExpandedTaskManager ? 'w-[90rem]' : 'w-[70rem]'} bg-[#131313] border border-[#444444] rounded-lg h-[90svh]`}>
             <div className="flex flex-col gap-2">
                 <h3 className="font-medium text-xl">Our today's tasks</h3>
                 <p className="text-md text-gray-main max-w-[400px]">

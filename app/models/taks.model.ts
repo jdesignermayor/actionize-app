@@ -2,7 +2,7 @@ interface Task {
     id: string,
     name: string,
     description: string,
-    categoryIds: TaskCategory[],
+    categoryIds: Array<string>,
 }
 
 interface TaskList {

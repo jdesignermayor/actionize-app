@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Actionize",
+  title: "Compass Agent",
   description: "Your AI Assistant, for Life-Work Balance",
 };
 
