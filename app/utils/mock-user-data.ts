@@ -120,5 +120,61 @@ const MOCK_USER_TASKS: TaskList = {
     }
 }
 
+
+const MOCK_USER_PRIORITIES: Priority[] = [{
+    "id": "1",
+    "name": "High",
+    "description": "High priority tasks are those that require immediate attention and should be completed as soon as possible.",
+    "color": "#FF0000"
+}, {
+    "id": "2",
+    "name": "Medium",
+    "description": "Medium priority tasks are those that require some attention but can be completed later.",
+    "color": "#FFA500"
+}, {
+    "id": "3",
+    "name": "Low",
+    "description": "Low priority tasks are those that can be completed later but are not as important.",
+    "color": "#00FF00"
+}];
+
+
+const MOCK_USER_PRIORITY_TAGS: PriorityTag[] = [{
+    "id": "1",
+    "name": "Work",
+    "description": "Work related tasks.",
+    "priorityId": "1",
+}, {
+    "id": "2",
+    "name": "Personal",
+    "description": "Personal related tasks.",
+    "priorityId": "2",
+}, {
+    "id": "3",
+    "name": "Health",
+    "description": "Health related tasks.",
+    "priorityId": "3",
+}, {
+    "id": "4",
+    "name": "today",
+    "description": "Today related tasks.",
+    "priorityId": "3",
+}, {
+    "id": "5",
+    "name": "tomorrow",
+    "description": "Tomorrow related tasks.",
+    "priorityId": "3",
+}, {
+    "id": "6",
+    "name": "next week",
+    "description": "Next week related tasks.",
+    "priorityId": "3",
+}, {
+    "id": "7",
+    "name": "Exercise",
+    "description": "Exercise related tasks.",
+    "priorityId": "4",
+}];
+
 export { MOCK_USER_TASKS };
 
