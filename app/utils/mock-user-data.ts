@@ -1,4 +1,7 @@
-const MOCK_USER_TASKS: TaskList = {
+import { Priority, PriorityTag, Teamplate } from "@/app/models/system.model";
+import { TaskListType } from "@/app/models/taks.model";
+
+const MOCK_USER_TASKS: TaskListType = {
     tasks: [
         {
             id: '001',
@@ -121,5 +124,5 @@ const MOCK_USER_PRIORITY_TAGS: PriorityTag[] = [{
     "priorityId": "4",
 }];
 
-export { MOCK_USER_TASKS, MOCK_USER_TEAMPLATES };
+export { MOCK_USER_PRIORITIES, MOCK_USER_PRIORITY_TAGS, MOCK_USER_TASKS, MOCK_USER_TEAMPLATES };
 

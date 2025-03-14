@@ -1,12 +1,13 @@
 import TaskGeneralButtons from "@/app/components/taskGeneralButtons";
 import TaskList from "@/app/components/taskList";
+import { TaskType } from "@/app/models/taks.model";
 import { MOCK_USER_TASKS } from "@/app/utils/mock-user-data";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 
 export default function TaskManager() {
-    const [tasks, setTasks] = useState<Task[] | []>([]);
+    const [tasks, setTasks] = useState<TaskType[] | []>([]);
 
     useEffect(() => {
         setTimeout(() => {

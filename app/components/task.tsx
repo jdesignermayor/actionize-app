@@ -1,8 +1,9 @@
 'use client';
 
+import { TaskType } from "@/app/models/taks.model";
 import { useState } from "react";
 
-export default function Task({ id, name }: Task) {
+export default function Task({ name }: TaskType) {
     const [isEditMode, setIsEditMode] = useState(false);
 
     return <>
