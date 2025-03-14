@@ -1,4 +1,4 @@
-import { getContext } from "@/app/utils/context";
+import { getContext } from "@/app/ai/rag/context";
 import { ScoredPineconeRecord } from "@pinecone-database/pinecone";
 import { NextResponse } from "next/server";
 
