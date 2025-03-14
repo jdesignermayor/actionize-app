@@ -1,23 +1,30 @@
 import { create } from "zustand";
 
+type UIChatbotMode = 'intro' | 'chating' | 'error';
+
 interface InterfaceStore {
-    isExpandedTaskManager: boolean,
-    isIntroEnabled: boolean,
+    chatbotMode: UIChatbotMode,
+    isTaskManagerExpanded: boolean,
+    isTaskManagerEnabled: boolean,
     isEditionTaskEnabled: boolean,
-    updateTaskManagerExpanded: (isExpandedTaskManager: boolean) => void,
-    updateIntroEnabled: (isIntroEnabled: boolean) => void,
+    updateTaskManagerExpanded: (isTaskManagerExpanded: boolean) => void,
+    updateIntroMode: (chatbotMode: UIChatbotMode) => void,
+    updateTaskManagerEnabled: (isTaskManagerEnabled: boolean) => void,
 }
 
 const initialState: InterfaceStore = {
-    isExpandedTaskManager: false,
-    isIntroEnabled: true,
+    chatbotMode: 'intro',
     isEditionTaskEnabled: false,
+    isTaskManagerExpanded: false,
+    isTaskManagerEnabled: false,
     updateTaskManagerExpanded: () => { },
-    updateIntroEnabled: () => { },
+    updateIntroMode: () => { },
+    updateTaskManagerEnabled: () => { },
 }
 
 export const useInterfaceStore = create<InterfaceStore>()((set) => ({
     ...initialState,
-    updateTaskManagerExpanded: (isExpandedTaskManager: boolean) => set({ isExpandedTaskManager }),
-    updateIntroEnabled: (isIntroEnabled: boolean) => set({ isIntroEnabled }),
+    updateTaskManagerExpanded: (isTaskManagerExpanded: boolean) => set({ isTaskManagerExpanded }),
+    updateIntroMode: (chatbotMode: UIChatbotMode) => set({ chatbotMode }),
+    updateTaskManagerEnabled: (isTaskManagerEnabled: boolean) => set({ isTaskManagerEnabled }),
 }));

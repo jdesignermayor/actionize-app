@@ -40,6 +40,31 @@ const MOCK_USER_TASKS: TaskList = {
     }
 }
 
+const MOCK_USER_TEAMPLATES: Teamplate[] = [{
+    "id": "1",
+    "name": "Work-Life Balance Template",
+    "description": "Create tasks to balance work, exercise, and personal time.",
+    "priorityId": "1"
+},
+{
+    "id": "2",
+    "name": "Daily Routine Template",
+    "description": "Organize your day to include work, exercise, and relaxation.",
+    "priorityId": "2"
+},
+{
+    "id": "3",
+    "name": "Efficiency & Well-being Template",
+    "description": "Create tasks to work efficiently while making time for exercise.",
+    "priorityId": "3"
+},
+{
+    "id": "4",
+    "name": "Balanced Week Template",
+    "description": "Plan your week to include work, fitness, and family time.",
+    "priorityId": "4"
+}];
+
 
 const MOCK_USER_PRIORITIES: Priority[] = [{
     "id": "1",
@@ -96,5 +121,5 @@ const MOCK_USER_PRIORITY_TAGS: PriorityTag[] = [{
     "priorityId": "4",
 }];
 
-export { MOCK_USER_TASKS };
+export { MOCK_USER_TASKS, MOCK_USER_TEAMPLATES };
 

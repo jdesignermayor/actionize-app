@@ -7,37 +7,39 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 export default function Layout() {
     const [parent, enable] = useAutoAnimate({ duration: 300 });
-    const { isExpandedTaskManager, isIntroEnabled, updateTaskManagerExpanded, updateIntroEnabled } = useInterfaceStore();
+    const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode, updateTaskManagerExpanded, updateTaskManagerEnabled, updateIntroMode } = useInterfaceStore();
 
     function expandOrCollapseTaskManager() {
-        updateTaskManagerExpanded(!isExpandedTaskManager);
+        updateTaskManagerExpanded(true);
         enable(true);
     }
 
     return <>
-        <button onClick={() => updateIntroEnabled(!isIntroEnabled)}>Intro</button>
-        <div className="flex items-center justify-center w-full px-[15%] overflow-hidden" ref={parent}>
-            {!isExpandedTaskManager && <div className={`w-[60rem]`} >
-                {isIntroEnabled && <div className="flex flex-col items-center justify-center">
-                    <div className="flex flex-col gap-3 items-center pt-[25vh] py-5">
-                        <h1 className=" font-medium text-4xl">What's your plan for today?</h1>
-                        <p className=" font-medium text-md text-gray-main">Your AI Assistant, for Life-Work <span className="text-white">Balance</span></p>
-                    </div>
-                </div>}
-                <Chatbot isIntroEnabled={isIntroEnabled} />
-            </div>}
-            {!isIntroEnabled && <div>
-                <button className="h-[90svh] px-2 hover:opacity-40" onClick={() => expandOrCollapseTaskManager()}>
-                    {isExpandedTaskManager ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                    </svg>}
-                </button>
-            </div>}
-            {!isIntroEnabled && <div>
-                <TaskManager isExpandedTaskManager={isExpandedTaskManager} />
-            </div>}
+        <div className="absolute top-0">
+            <button className="bg-red-500 text-white p-2 rounded-lg" onClick={() => updateIntroMode('chating')}>chatbotMode</button>
+            <button className="bg-red-200 text-white p-2 rounded-lg" onClick={() => updateTaskManagerEnabled(true)}>isTaskManagerEnabled</button>
+            <p>chatbotMode: {chatbotMode}</p>
+            <p>isTaskManagerEnabled: {JSON.stringify(isTaskManagerEnabled)}</p>
+        </div>
+
+        <div className="flex items-center justify-center w-full lg:px-[calc(5%)] overflow-hidden" ref={parent}>
+            <div className="w-full lg:w-[calc(50%)] xl:w-[calc(35%)] 2xl:w-[calc(30%)] h-[85svh] flex flex-col p-2">
+                <Chatbot />
+            </div>
+            {isTaskManagerEnabled && <>
+                <div className="h-[85svh]">
+                    <button className="h-[90svh] px-2 hover:opacity-40" onClick={() => expandOrCollapseTaskManager()}>
+                        {isTaskManagerExpanded ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>}
+                    </button>
+                </div>
+                <div className="lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)] h-[85svh]">
+                    <TaskManager />
+                </div>
+            </>}
         </div>
     </>
 }
