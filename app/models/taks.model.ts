@@ -1,22 +1,22 @@
-interface Task {
+export interface TaskType {
     id: string,
     name: string,
     description: string,
     categoryIds: Array<string>,
 }
 
-interface TaskList {
-    tasks: Task[],
-    rates?: TaskListRates,
+export interface TaskListType {
+    tasks: TaskType[],
+    rates?: TaskListRatesType,
 }
 
-interface TaskCategory {
+export interface TaskCategoryType {
     id: string,
     name: string,
     description: string,
 }
 
-interface TaskListRates {
+export interface TaskListRatesType {
     total: number,
     opened: number,
     completed: number,

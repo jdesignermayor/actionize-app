@@ -1,18 +1,18 @@
-interface Priority {
+export interface Priority {
     id: string,
     name: string,
     description: string,
     color: string,
 }
 
-interface PriorityTag {
+export interface PriorityTag {
     id: string,
     name: string,
     description: string,
     priorityId: string,
 }
 
-interface Teamplate {
+export interface Teamplate {
     id: string,
     name: string,
     description: string,

@@ -1,18 +1,17 @@
 'use client';
 import IntroChatMessage from '@/app/components/introChatMessage';
 import { useInterfaceStore } from '@/app/store/interface.store';
-import { useChat } from '@ai-sdk/react';
 import { useState } from 'react';
 import { MOCK_USER_TEAMPLATES } from '../utils/mock-user-data';
 
 
 export default function Chatbot() {
     const [userPrompt, setUserPrompt] = useState('');
-    const { chatbotMode, isTaskManagerEnabled } = useInterfaceStore();
+    const { chatbotMode } = useInterfaceStore();
 
-    const { messages, input, status, stop, handleInputChange, handleSubmit } = useChat({
-        sendExtraMessageFields: true,
-    });
+    // const { messages, input, status, stop, handleInputChange, handleSubmit } = useChat({
+    //     sendExtraMessageFields: true,
+    // });
 
     return <div className={`flex flex-col relative justify-between items-center h-full p-2`}>
         <div className={`h-full w-full`}>
