@@ -7,7 +7,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 export default function IntroLayoutSection() {
     const [parent, enable] = useAutoAnimate({ duration: 300 });
-    const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode, updateTaskManagerExpanded, updateTaskManagerEnabled, updateIntroMode } = useInterfaceStore();
+    const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode, updateTaskManagerExpanded, updateTaskManagerEnabled, updateChatMode } = useInterfaceStore();
 
     function expandOrCollapseTaskManager() {
         updateTaskManagerExpanded(true);
@@ -15,12 +15,12 @@ export default function IntroLayoutSection() {
     }
 
     return <>
-        <div className="absolute top-0">
-            <button className="bg-red-500 text-white p-2 rounded-lg" onClick={() => updateIntroMode('chating')}>chatbotMode</button>
+        {/* <div className="absolute top-0">
+            <button className="bg-red-500 text-white p-2 rounded-lg" onClick={() => updateChatMode('chating')}>chatbotMode</button>
             <button className="bg-red-200 text-white p-2 rounded-lg" onClick={() => updateTaskManagerEnabled(true)}>isTaskManagerEnabled</button>
             <p>chatbotMode: {chatbotMode}</p>
             <p>isTaskManagerEnabled: {JSON.stringify(isTaskManagerEnabled)}</p>
-        </div>
+        </div> */}
 
         <div className={`flex ${chatbotMode === 'intro' && ' items-center justify-center '} w-full overflow-hidden px-5`} ref={parent}>
             <div className={`w-full h-[90svh] flex flex-col ${chatbotMode === 'chating' ? 'w-[calc(8%)] lg:w-[calc(28%)] 2xl:w-[calc(18%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >

@@ -1,30 +1,61 @@
 'use client';
 import IntroChatMessage from '@/app/components/introChatMessage';
+import { Messages } from '@/app/components/messages';
 import { useInterfaceStore } from '@/app/store/interface.store';
-import { useState } from 'react';
-import { MOCK_USER_TEAMPLATES } from '../utils/mock-user-data';
+import { MOCK_USER_TEAMPLATES } from '@/app/utils/mock-user-data';
+import { useChat } from '@ai-sdk/react';
+import { toast } from 'sonner';
+import { MultimodalInput } from './multimodal-input';
 
 
 export default function Chatbot() {
-    const [userPrompt, setUserPrompt] = useState('');
     const { chatbotMode } = useInterfaceStore();
 
-    // const { messages, input, status, stop, handleInputChange, handleSubmit } = useChat({
-    //     sendExtraMessageFields: true,
-    // });
+    const { messages,
+        setMessages,
+        handleSubmit,
+        input,
+        setInput,
+        append,
+        status,
+        stop,
+        reload } = useChat({
+            experimental_throttle: 100,
+            sendExtraMessageFields: true,
+            onFinish: () => {
+            },
+            onError: () => {
+                toast.error('An error occured, please try again!');
+            },
+        });
 
     return <div className={`flex flex-col gap-8 relative justify-between items-center w-full pb-4`}>
         <div className=' pb-5'>
-            {chatbotMode === 'intro' && <><IntroChatMessage /> </>}
+            {chatbotMode === 'intro' && <IntroChatMessage />}
+        </div>
+        <div className={`h-[75vh] w-full ${chatbotMode === 'intro' && 'hidden'}`}>
+            <Messages
+                status={status}
+                messages={messages}
+                setMessages={setMessages}
+                reload={reload}
+                isReadonly={chatbotMode === 'intro'}
+            />
         </div>
         <div className='flex flex-col gap-5 justify-between focus:border-white focus:border-2 w-full rounded-xl'>
-            <textarea name="prompt" onChange={(e) => setUserPrompt(e.target.value)} placeholder={'I need to create tasks for organizing my day to include work, exercise, and relaxation. '} className=' 2xl:text-lg border-panel-gray-main focus:bg-[#222222] placeholder:text-text-gray-main px-4 pr-20 pb-9 pt-5 border border-bg-gray-main rounded-2xl focus:ring-2 ring-white h-36 resize-none w-full outline-none' ></textarea>
-
-            <div className='absolute right-0 pr-8 pt-20'>
-                {userPrompt.length > 0 && <button className=' flex items-center justify-center bg-white w-10 h-10  rounded-2xl p-2 focus:ring-4 ring-white '><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="size-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
-                </svg></button>}
-            </div>
+            <form>
+                <MultimodalInput
+                    chatId={null}
+                    input={input}
+                    setInput={setInput}
+                    handleSubmit={handleSubmit}
+                    status={status}
+                    stop={stop}
+                    messages={messages}
+                    setMessages={setMessages}
+                    append={append}
+                />
+            </form>
 
             {chatbotMode === 'intro' && <>
                 <div className='flex flex-wrap gap-2'>
@@ -33,7 +64,6 @@ export default function Chatbot() {
                     </button>))}
                 </div>
             </>}
-
         </div>
     </div>
 }
