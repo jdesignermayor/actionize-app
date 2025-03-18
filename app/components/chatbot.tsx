@@ -28,7 +28,7 @@ export default function Chatbot() {
 
             {chatbotMode === 'intro' && <>
                 <div className='flex flex-wrap gap-2'>
-                    {MOCK_USER_TEAMPLATES?.map(({ id, name, description }) => (<button key={id} className=' text-sm font-bold border hover:bg-panel-gray-main border-[#252525] text-white p-3 rounded-2xl text-left transition-all'>
+                    {MOCK_USER_TEAMPLATES?.map(({ id, name }) => (<button key={id} className=' text-sm font-bold border hover:bg-panel-gray-main border-[#252525] text-white p-3 rounded-2xl text-left transition-all'>
                         <p>{name}</p>
                     </button>))}
                 </div>
