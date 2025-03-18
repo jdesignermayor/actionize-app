@@ -23,7 +23,7 @@ export default function IntroLayoutSection() {
         </div>
 
         <div className={`flex ${chatbotMode === 'intro' && ' items-center justify-center '} w-full overflow-hidden`} ref={parent}>
-            <div className={`w-full h-[90svh] flex flex-col p-2 ${chatbotMode === 'chating' ? 'w-[calc(10%)] lg:w-[calc(20%)] 2xl:w-[calc(25%)] justify-end' : 'lg:w-[calc(60%)] xl:w-[calc(60%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >
+            <div className={`w-full h-[90svh] flex flex-col p-2 ${chatbotMode === 'chating' ? 'w-[calc(10%)] lg:w-[calc(32%)] 2xl:w-[calc(25%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >
                 <Chatbot />
             </div>
             {isTaskManagerEnabled && <>
