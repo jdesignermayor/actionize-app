@@ -54,7 +54,23 @@ const MOCK_USER_TEAMPLATES: Teamplate[] = [{
     "name": "Daily Routine Template",
     "description": "Organize your day to include work, exercise, and relaxation.",
     "priorityId": "2"
-}];
+}, {
+    "id": "3",
+    "name": "Health and Wellness Template",
+    "description": "Create tasks to maintain personal health and wellness.",
+    "priorityId": "3"
+}, {
+    "id": "4",
+    "name": "Personal Finance Template",
+    "description": "Create tasks to manage personal finances.",
+    "priorityId": "4"
+}, {
+    "id": "5",
+    "name": "Client Communication Template",
+    "description": "Create tasks to communicate with clients.",
+    "priorityId": "5"
+}
+];
 
 
 const MOCK_USER_PRIORITIES: Priority[] = [{

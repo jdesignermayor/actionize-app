@@ -5,7 +5,7 @@ import TaskManager from "@/app/components/taskManager";
 import { useInterfaceStore } from "@/app/store/interface.store";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-export default function Layout() {
+export default function IntroLayoutSection() {
     const [parent, enable] = useAutoAnimate({ duration: 300 });
     const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode, updateTaskManagerExpanded, updateTaskManagerEnabled, updateIntroMode } = useInterfaceStore();
 
@@ -22,8 +22,8 @@ export default function Layout() {
             <p>isTaskManagerEnabled: {JSON.stringify(isTaskManagerEnabled)}</p>
         </div>
 
-        <div className="flex items-center justify-center w-full lg:px-[calc(5%)] overflow-hidden" ref={parent}>
-            <div className="w-full lg:w-[calc(50%)] xl:w-[calc(35%)] 2xl:w-[calc(30%)] h-[85svh] flex flex-col p-2">
+        <div className="flex items-center justify-center w-full lg:px-[calc(2%)] 2xl:px-0 overflow-hidden" ref={parent}>
+            <div className={`w-full h-[90svh] flex flex-col p-2 ${chatbotMode === 'chating' ? 'w-[calc(10%)] lg:w-[calc(30%)] 2xl:w-[calc(28%)] justify-end' : 'lg:w-[calc(60%)] xl:w-[calc(60%)] 2xl:w-[calc(40%)] justify-center items-center'}`} >
                 <Chatbot />
             </div>
             {isTaskManagerEnabled && <>
@@ -36,7 +36,7 @@ export default function Layout() {
                         </svg>}
                     </button>
                 </div>
-                <div className="lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)] h-[85svh]">
+                <div className={`h-[90svh] ${chatbotMode === 'chating' ? 'w-[calc(65%)]' : 'lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)]'}`}>
                     <TaskManager />
                 </div>
             </>}
