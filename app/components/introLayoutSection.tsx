@@ -22,8 +22,8 @@ export default function IntroLayoutSection() {
             <p>isTaskManagerEnabled: {JSON.stringify(isTaskManagerEnabled)}</p>
         </div>
 
-        <div className={`flex ${chatbotMode === 'intro' && ' items-center justify-center '} w-full overflow-hidden`} ref={parent}>
-            <div className={`w-full h-[90svh] flex flex-col p-2 ${chatbotMode === 'chating' ? 'w-[calc(10%)] lg:w-[calc(32%)] 2xl:w-[calc(25%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >
+        <div className={`flex ${chatbotMode === 'intro' && ' items-center justify-center '} w-full overflow-hidden px-5`} ref={parent}>
+            <div className={`w-full h-[90svh] flex flex-col ${chatbotMode === 'chating' ? 'w-[calc(8%)] lg:w-[calc(28%)] 2xl:w-[calc(18%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >
                 <Chatbot />
             </div>
             {isTaskManagerEnabled && <>
@@ -36,7 +36,7 @@ export default function IntroLayoutSection() {
                         </svg>}
                     </button>
                 </div>
-                <div className={`h-[90svh] ${chatbotMode === 'chating' ? 'w-[calc(70%)]' : 'lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)]'}`}>
+                <div className={`h-[90svh] ${chatbotMode === 'chating' ? 'w-[calc(88%)] lg:w-[calc(68%)] 2xl:w-[calc(78%)]' : 'lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)]'}`}>
                     <TaskManager />
                 </div>
             </>}

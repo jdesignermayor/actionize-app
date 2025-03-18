@@ -16,7 +16,7 @@ export default function TaskManager() {
     }, []);
 
     return <>
-        <div className={`flex flex-col gap-[2em] px-10 py-[5em] bg-[#131313] border border-gray-main rounded-xl h-[90svh]`}>
+        <div className={`flex flex-col gap-[2em] px-10 py-[5em] bg-[#131313] border border-gray-main w-full rounded-xl h-[90svh]`}>
             <div className="flex flex-col gap-2">
                 <h3 className="font-medium text-xl">Our today's tasks</h3>
                 <p className="text-md text-gray-main max-w-[400px] text-text-gray-main">
