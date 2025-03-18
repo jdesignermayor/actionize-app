@@ -13,7 +13,7 @@ export default function Chatbot() {
     //     sendExtraMessageFields: true,
     // });
 
-    return <div className={`flex flex-col gap-8 relative justify-between items-center w-full`}>
+    return <div className={`flex flex-col gap-8 relative justify-between items-center w-full pb-4`}>
         <div className=' pb-5'>
             {chatbotMode === 'intro' && <><IntroChatMessage /> </>}
         </div>
