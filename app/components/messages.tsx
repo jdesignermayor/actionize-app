@@ -1,4 +1,4 @@
-import { ThinkingMessage } from "@/app/components/message";
+import { PreviewMessage, ThinkingMessage } from "@/app/components/message";
 import { useScrollToBottom } from "@/app/components/use-scroll-bottom";
 import { UseChatHelpers } from "@ai-sdk/react";
 import { UIMessage } from "ai";
@@ -31,19 +31,15 @@ function PureMessages({
             {/* {messages.length === 0 && <Overview />} */}
 
             {messages.map((message, index) => (
-
-                <>
-                    {message.content}
-                </>
-                // <PreviewMessage
-                //     key={message.id}
-                //     chatId={chatId}
-                //     message={message}
-                //     isLoading={status === 'streaming' && messages.length - 1 === index}
-                //     setMessages={setMessages}
-                //     reload={reload}
-                //     isReadonly={isReadonly}
-                // />
+                <PreviewMessage
+                    key={message.id}
+                    chatId={'0'}
+                    message={message}
+                    isLoading={status === 'streaming' && messages.length - 1 === index}
+                    setMessages={setMessages}
+                    reload={reload}
+                    isReadonly={isReadonly}
+                />
             ))}
 
             {status === 'submitted' &&
