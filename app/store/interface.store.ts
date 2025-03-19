@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type UIChatbotMode = 'intro' | 'chating' | 'error';
+export type UIChatbotMode = 'intro' | 'chating' | 'error';
 
 interface InterfaceStore {
     chatbotMode: UIChatbotMode,
