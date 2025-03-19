@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default function SendButton({
     input,
     submitForm,
@@ -5,6 +6,7 @@ export default function SendButton({
     input: string;
     submitForm: () => void;
 }) {
+
     return (
         <button className=' flex items-center justify-center bg-white w-10 h-10  rounded-2xl p-2 focus:ring-4 ring-white '>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" className="size-5">

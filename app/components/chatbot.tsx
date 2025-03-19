@@ -33,7 +33,7 @@ export default function Chatbot() {
         <div className=' pb-5'>
             {chatbotMode === 'intro' && <IntroChatMessage />}
         </div>
-        <div className={`h-[75vh] w-full ${chatbotMode === 'intro' && 'hidden'}`}>
+        <div className={`h-[75vh] overflow-y-auto w-full ${chatbotMode === 'intro' && 'hidden'}`}>
             <Messages
                 status={status}
                 messages={messages}

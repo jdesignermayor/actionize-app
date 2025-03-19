@@ -7,7 +7,6 @@ import {
     useCallback,
     useEffect,
     useRef,
-    useState,
     type Dispatch,
     type SetStateAction
 } from 'react';
@@ -19,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { UseChatHelpers } from '@ai-sdk/react';
 import { ArrowUpIcon, StopCircleIcon } from 'lucide-react';
 
+/* eslint-disable */
 function PureMultimodalInput({
     chatId,
     input,
@@ -36,8 +36,8 @@ function PureMultimodalInput({
     setInput: UseChatHelpers['setInput'];
     status: UseChatHelpers['status'];
     stop: () => void;
-    append: UseChatHelpers['append'];
-    messages: Array<Message>;
+    append?: UseChatHelpers['append'];
+    messages?: Array<Message>;
     setMessages: Dispatch<SetStateAction<Array<Message>>>;
     handleSubmit: UseChatHelpers['handleSubmit'];
     className?: string;
@@ -45,7 +45,12 @@ function PureMultimodalInput({
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const { width } = useWindowSize();
 
+
     useEffect(() => {
+        console.log('messages', messages);
+        console.log('append', append);
+        console.log('className', className);
+
         if (textareaRef.current) {
             adjustHeight();
         }
@@ -88,9 +93,6 @@ function PureMultimodalInput({
         adjustHeight();
     };
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
-
     const submitForm = useCallback(() => {
         handleSubmit(undefined);
         setLocalStorageInput('');
@@ -119,7 +121,7 @@ function PureMultimodalInput({
                 data-testid="multimodal-input"
                 ref={textareaRef}
                 className=' 2xl:text-lg border-panel-gray-main focus:bg-[#222222] placeholder:text-text-gray-main px-4 pr-20 pb-9 pt-5 border border-bg-gray-main rounded-2xl focus:ring-2 ring-white h-36 resize-none w-full outline-none'
-                placeholder="Send a message..."
+                placeholder="Today i will need to do..."
                 value={input}
                 onChange={handleInput}
                 rows={2}

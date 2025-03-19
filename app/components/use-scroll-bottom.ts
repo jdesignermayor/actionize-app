@@ -27,6 +27,6 @@ export function useScrollToBottom<T extends HTMLElement>(): [
         }
     }, []);
 
-    // @ts-ignore
+    // @ts-expect-error - TS doesn't know that the refs are initialized
     return [containerRef, endRef];
 }
