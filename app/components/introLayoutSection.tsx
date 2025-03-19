@@ -2,41 +2,39 @@
 
 import Chatbot from "@/app/components/chatbot";
 import TaskManager from "@/app/components/taskManager";
+import TaskManagerExpandButton from "@/app/components/taskManagerExpandButton";
 import { useInterfaceStore } from "@/app/store/interface.store";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import cx from 'classnames';
 
 export default function IntroLayoutSection() {
-    const [parent, enable] = useAutoAnimate({ duration: 300 });
-    const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode, updateTaskManagerExpanded, updateTaskManagerEnabled, updateIntroMode } = useInterfaceStore();
+    const [parent] = useAutoAnimate({ duration: 300 });
+    const { isTaskManagerEnabled, isTaskManagerExpanded, chatbotMode } = useInterfaceStore();
 
-    function expandOrCollapseTaskManager() {
-        updateTaskManagerExpanded(true);
-        enable(true);
-    }
 
     return <>
-        <div className="absolute top-0">
-            <button className="bg-red-500 text-white p-2 rounded-lg" onClick={() => updateIntroMode('chating')}>chatbotMode</button>
+        {/* <div className="absolute top-0">
+            <button className="bg-red-500 text-white p-2 rounded-lg" onClick={() => updateChatMode('chating')}>chatbotMode</button>
             <button className="bg-red-200 text-white p-2 rounded-lg" onClick={() => updateTaskManagerEnabled(true)}>isTaskManagerEnabled</button>
             <p>chatbotMode: {chatbotMode}</p>
             <p>isTaskManagerEnabled: {JSON.stringify(isTaskManagerEnabled)}</p>
-        </div>
+        </div> */}
 
-        <div className={`flex ${chatbotMode === 'intro' && ' items-center justify-center '} w-full overflow-hidden px-5`} ref={parent}>
-            <div className={`w-full h-[90svh] flex flex-col ${chatbotMode === 'chating' ? 'w-[calc(8%)] lg:w-[calc(28%)] 2xl:w-[calc(18%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'}`} >
+        <div className={`flex ${!isTaskManagerEnabled && ' items-center justify-center '} w-full overflow-hidden px-5`} ref={parent}>
+            <div className={`w-full h-[90svh] flex flex-col ${chatbotMode === 'chating' ? 'w-[calc(8%)] lg:w-[calc(38%)] 2xl:w-[calc(28%)] justify-end' : 'lg:w-[calc(40%)] xl:w-[calc(43%)] 2xl:w-[calc(30%)] justify-center items-center'} ${isTaskManagerExpanded && ' hidden '}`} >
                 <Chatbot />
             </div>
+
             {isTaskManagerEnabled && <>
                 <div className="h-[85svh]">
-                    <button className="h-[90svh] px-2 hover:opacity-40" onClick={() => expandOrCollapseTaskManager()}>
-                        {isTaskManagerExpanded ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                        </svg> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                        </svg>}
-                    </button>
+                    <TaskManagerExpandButton />
                 </div>
-                <div className={`h-[90svh] ${chatbotMode === 'chating' ? 'w-[calc(88%)] lg:w-[calc(68%)] 2xl:w-[calc(78%)]' : 'lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)]'}`}>
+                <div className={cx('w-full h-[90svh]', { 'w-[calc(88%)] lg:w-[calc(58%)] 2xl:w-[calc(68%)]': chatbotMode === 'chating' && !isTaskManagerExpanded }, {
+                    'lg:w-[calc(50%)] xl:w-[calc(65%)] 2xl:w-[calc(70%)]': chatbotMode !== 'chating' && !isTaskManagerExpanded
+                }, {
+                    'w-full': isTaskManagerExpanded && chatbotMode !== 'chating'
+                })
+                }>
                     <TaskManager />
                 </div>
             </>}

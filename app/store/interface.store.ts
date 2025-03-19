@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type UIChatbotMode = 'intro' | 'chating' | 'error';
+export type UIChatbotMode = 'intro' | 'chating' | 'error';
 
 interface InterfaceStore {
     chatbotMode: UIChatbotMode,
@@ -8,7 +8,7 @@ interface InterfaceStore {
     isTaskManagerEnabled: boolean,
     isEditionTaskEnabled: boolean,
     updateTaskManagerExpanded: (isTaskManagerExpanded: boolean) => void,
-    updateIntroMode: (chatbotMode: UIChatbotMode) => void,
+    updateChatMode: (chatbotMode: UIChatbotMode) => void,
     updateTaskManagerEnabled: (isTaskManagerEnabled: boolean) => void,
 }
 
@@ -18,13 +18,13 @@ const initialState: InterfaceStore = {
     isTaskManagerExpanded: false,
     isTaskManagerEnabled: false,
     updateTaskManagerExpanded: () => { },
-    updateIntroMode: () => { },
+    updateChatMode: () => { },
     updateTaskManagerEnabled: () => { },
 }
 
 export const useInterfaceStore = create<InterfaceStore>()((set) => ({
     ...initialState,
     updateTaskManagerExpanded: (isTaskManagerExpanded: boolean) => set({ isTaskManagerExpanded }),
-    updateIntroMode: (chatbotMode: UIChatbotMode) => set({ chatbotMode }),
+    updateChatMode: (chatbotMode: UIChatbotMode) => set({ chatbotMode }),
     updateTaskManagerEnabled: (isTaskManagerEnabled: boolean) => set({ isTaskManagerEnabled }),
 }));
